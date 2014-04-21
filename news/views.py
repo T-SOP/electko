@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from news.models import Greeting
+from google.appengine.api import users
 from django.http import HttpResponse
 from services import newsInfo
 import json
