@@ -47,23 +47,26 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+		'google.appengine.ext.ndb.django_middleware.NdbDjangoMiddleware',
 )
 
 ROOT_URLCONF = 'sad.urls'
 
-WSGI_APPLICATION = 'sad.wsgi.application'
+#origin
+#WSGI_APPLICATION = 'sad.wsgi.application'
+
 
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+"""
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
