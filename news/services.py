@@ -34,7 +34,6 @@ def newsInfo():
 		for item in items:
 			info = {};
 			info['title'] = item.find('title').text
-			logging.info(info['title'])
 			info['link'] = item.find('link').text
 			info['author'] = item.find('author').text
 			info['description'] = item.find('description').text
@@ -44,7 +43,6 @@ def newsInfo():
 	return infos
 
 def child(url):
-	logging.info(url)
 	response =	urllib2.urlopen(url).read()
 	parser = ET.HTMLParser()
 	tree = ET.fromstring(response,parser)
