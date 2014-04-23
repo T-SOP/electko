@@ -1,5 +1,6 @@
 Ext.Loader.setPath({
 	'Ext': 'lib/src',
+	'Sencha': 'static/app'
 })
 
 
@@ -24,6 +25,7 @@ icon: {
 114: 'resources/icons/icon@2x.png',
 144: 'resources/icons/icon@144.png'
 },
+	views: ["ViewPort","MainPanel", "NoteListContainer"],
 	launch: function() {
 		console.log('this launch run');
 		var listConfiguration = this.getListConfiguration();
@@ -41,8 +43,9 @@ icon: {
 		}else{
 			Ext.Viewport.add(listConfiguration);
 		}
-	},
-	getListConfiguration: function() {
+
+		//Ext.create("Sencha.view.ViewPort");
+	},	getListConfiguration: function() {
 		var store = Ext.create('Ext.data.Store',{
 			fields: ['title','link','description','author','content'],
 			sorters: 'author',
