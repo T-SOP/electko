@@ -6,6 +6,7 @@ import urllib
 from lxml import etree as ET
 import collections
 import re
+import logging
 
 class Rss:
 	def __init__(self,url,newsList):
@@ -16,30 +17,33 @@ class Rss:
 
 def newsInfo():
 	infos = []
-	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&q=%B9%DA%BF%F8%BC%F8&cp=37730750'
+	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&'
 	rss = Rss(url,["37736525","70640889,264","1119","120","78305928"])
 	data = {}
-	data['q'] = 'ë°•ì›ìˆœ'
-	print data['q']
+	data['q'] = '¹Ú¿ø¼ø'
 	data['cp'] = '37730750'
-#	req = urllib2.Request(url,data)
-	response = urllib2.urlopen(url)
+	data = urllib.urlencode(data)
+	req = urllib2.Request(url,data)
+	response = urllib2.urlopen(req)
 	xml =  response.read().decode('cp949', 'ignore').encode('utf-8')
 	parser = ET.XMLParser(encoding="utf-8")
 	rss =  ET.fromstring(xml,parser = parser)
 
 	items = rss.findall('.//channel/item')
-	info = {}
 	for item in items:
+		info = {};
 		info['title'] = item.find('title').text
+		logging.info(info['title'])
 		info['link'] = item.find('link').text
-		info['content'] = child(item.find('link').text)
+		info['author'] = item.find('author').text
+		info['description'] = item.find('description').text
+#		info['content'] = child(item.find('link').text)
 		infos.append(info)
 
 	return infos
 
 def child(url):
-	print url
+	logging.info(url)
 	response =	urllib2.urlopen(url).read()
 	parser = ET.HTMLParser()
 	tree = ET.fromstring(response,parser)
