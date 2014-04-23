@@ -18,27 +18,28 @@ class Rss:
 def newsInfo():
 	infos = []
 	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&'
-	rss = Rss(url,["37736525","70640889,264","1119","120","78305928"])
-	data = {}
-	data['q'] = '박원순'
-	data['cp'] = '37730750'
-	data = urllib.urlencode(data)
-	req = urllib2.Request(url,data)
-	response = urllib2.urlopen(req)
-	xml =  response.read().decode('cp949', 'ignore').encode('utf-8')
-	parser = ET.XMLParser(encoding="utf-8")
-	rss =  ET.fromstring(xml,parser = parser)
-
-	items = rss.findall('.//channel/item')
-	for item in items:
-		info = {};
-		info['title'] = item.find('title').text
-		logging.info(info['title'])
-		info['link'] = item.find('link').text
-		info['author'] = item.find('author').text
-		info['description'] = item.find('description').text
-#		info['content'] = child(item.find('link').text)
-		infos.append(info)
+	cps = ["37736525","70640889,264","1119","120","78305928"]
+	for cp in cps:
+		data = {}
+		data['q'] = '박원순'
+		data['cp'] = cp
+		data = urllib.urlencode(data)
+		req = urllib2.Request(url,data)
+		response = urllib2.urlopen(req)
+		xml =  response.read().decode('cp949', 'ignore').encode('utf-8')
+		parser = ET.XMLParser(encoding="utf-8")
+		rss =  ET.fromstring(xml,parser = parser)
+	
+		items = rss.findall('.//channel/item')
+		for item in items:
+			info = {};
+			info['title'] = item.find('title').text
+			logging.info(info['title'])
+			info['link'] = item.find('link').text
+			info['author'] = item.find('author').text
+			info['description'] = item.find('description').text
+	#		info['content'] = child(item.find('link').text)
+			infos.append(info)
 
 	return infos
 

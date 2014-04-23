@@ -45,11 +45,11 @@ icon: {
 	getListConfiguration: function() {
 		var store = Ext.create('Ext.data.Store',{
 			fields: ['title','link','description','author','content'],
-			sorters: 'title',
+			sorters: 'author',
 			autoLoad: true,
 			grouper: {
 				groupFn: function(record){
-					return record.get('title')[0];
+					return record.get('author');
 				}
 			},
 			proxy:{
