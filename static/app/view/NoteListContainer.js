@@ -8,17 +8,16 @@ Ext.define("Sencha.view.NoteListContainer",{
 			docked: "top",
 			title: "Note List",
 			items: [
-				{
-					xtype: "spacer"
-				}, {
+	
+				{ xtype: "spacer" },{
 					xtype: "button",
 					text: "Add",
 					handler: this.onAddNoteTap,
 					scope: this
-				}
+				} 
 			]
 		};
-		this.add([toolbar,{xtype: "searchbar"}, {xtype: "notelist"}]);
+		this.add([toolbar,/*{xtype: "searchbar"} ,*/ {xtype: "notelist"}]);
 	},
 	config:{
 		layout: "fit",

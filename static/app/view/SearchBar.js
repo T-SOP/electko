@@ -3,6 +3,7 @@ Ext.define("Sencha.view.SearchBar",{
 	xtype: "searchbar",
 	requires: ["Ext.field.Search"],
 	initialize: function(){
+		console.log('searchbar init');
 		var searchbar = {
 			xtype: "toolbar",
 			ui: "searchbar",

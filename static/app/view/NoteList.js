@@ -2,8 +2,13 @@ Ext.define('Sencha.view.NoteList',{
 	extend: 'Ext.dataview.List',
 xtype: 'notelist',
 config: {
-		itemTpl: '{title} [{author} <br /> {link} <br /> {description}',
-		store : 'News',
+		store : 'Note',
+		itemTpl: [
+						'<div>',
+							'<div>{title}</div>',
+							'<p>{description}</p>',
+						'</div>'
+					],
 		onItemDisclosure: function(record,btn,index){
 		
 		}
