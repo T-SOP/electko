@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^news/', include('news.urls')),
+    url(r'^vote/', include('vote.urls')),
 		url(r'^sencha', 'sad.views.sencha_home',name="home"),
 		url(r'^angular', 'sad.views.angular_home',name="home"),
 )
