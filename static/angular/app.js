@@ -1,4 +1,8 @@
-var app = angular.module('bongApp',['ngRoute','ngResource','ngGrid']);
+var app = angular.module('bongApp',['ngRoute','ngResource','ngGrid','ngCookies']);
+
+app.config(['$httpProvider','$cookiesProvider',function($httpProvider,$cookies){
+	$httpProvider.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken
+}]);
 /*
 app.service('Vote',function(){
 	 this.like = function(link){

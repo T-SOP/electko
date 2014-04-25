@@ -1,16 +1,31 @@
-var app = app|| angular.module('bongApp',['ngRoute','ngResource','ngGrid']);
+var app = app|| angular.module('bongApp',['ngRoute','ngResource','ngGrid','ngCookies']);
 
-app.service('Vote',function($http){
+app.service('Vote',function($http,$cookies){
 	 this.get = function(){
 	 	return $http.get('/vote').then(function(response){
 			return response.data;
 		});
 	 }
-	 this.like = function(link){
-	 		return "this like link link is " + link;
+	 this.like = function(news){
+		 return $http.post('/vote/like',news,{
+		 	headers:{
+				'X-CSRFToken' : $cookies.csrftoken
+			}
+		 }).then(function(response){
+			return response.data;
+		});
+ 	//	return "this like link link is " + link;
 	 }
-	 this.dislike = function(link){
-	 		return "this dislike link link is " + link;
+	 this.unlike = function(news){
+
+		return $http.post('/vote/unlike',news,{
+			headers: {
+				'X-CSRFToken' : $cookies.csrftoken
+			}
+		}).then(function(response){
+			return response.data;
+		}); 
+	// 		 return "this dislike link link is " + link;
 	 }
 });
 

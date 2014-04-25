@@ -1,5 +1,5 @@
 
-var app = app || angular.module('bongApp',['ngRoute','ngResource','ngGrid']);
+var app = app || angular.module('bongApp',['ngRoute','ngResource','ngGrid','ngCookies']);
 
 app.controller('MainCtrl',function($scope,Vote){
 $scope.test="hhhh";
@@ -11,19 +11,24 @@ app.controller("LeftCtrl",function($scope,Vote){
 	});
 });
 
-app.controller('RightCtrl',function($scope,News){
+app.controller('RightCtrl',function($scope,$cookies,News,Vote){
 	console.log('rightCtrl');
+	console.log($cookies.csrftoken);
 
 	News.get().then(function(d){
 		$scope.newses = 	d.news;
 	});
 	$scope.like = function(index){
 		var link = $scope.newses[index].link;
-		console.log(Vote.like(link));
+		news = $scope.newses[index];
+		console.log(news);
+		console.log(Vote.like(news));
 	};
-	$scope.dislike = function(index){
-		var link = $scope.newses[index].link;
-		console.log(Vote.like(link));
+	$scope.unlike = function(index){
+		var link = $scope.newses[index].link,
+		news = $scope.newses[index];
+		console.log(news);
+		console.log(Vote.unlike(news));
 	};
 });
 
