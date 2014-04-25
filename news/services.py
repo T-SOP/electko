@@ -17,12 +17,12 @@ class Rss:
 
 def newsInfo():
 	infos = []
-	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&q=%BC%BC%BF%F9%C8%A3&'
-#	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&'
+#	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&q=%BC%BC%BF%F9%C8%A3&'
+	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&'
 	cps = ["37736525","70640889,264","1119","120","78305928","1185","73","98","23","310","49","8"]
 	for cp in cps:
 		data = {}
-#		data['q'] = 'ì„¸ì›”í˜¸'
+		data['q'] = '¼¼¿ùÈ£'
 		data['cp'] = cp
 		data = urllib.urlencode(data)
 		req = urllib2.Request(url,data)
@@ -37,7 +37,7 @@ def newsInfo():
 			info['title'] = item.find('title').text
 			info['link'] = item.find('link').text
 			info['author'] = item.find('author').text
-			info['description'] = item.find('description').text
+	#		info['description'] = item.find('description').text
 	#		info['content'] = child(item.find('link').text)
 			infos.append(info)
 
