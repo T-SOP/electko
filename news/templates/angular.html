@@ -13,6 +13,7 @@
 		<script type="text/javascript">
 			(function() {
 			 var angularPath = '/static/angular-1.2.16/';
+			 var angularGridPath = '/static/angular-ui-ng-grid/';
 
 			 var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1], rUrl = /(#!\/|api|guide|misc|tutorial|error|index[^\.]*\.html).*$/, baseUrl = location.href.replace(rUrl, indexFile), production = location.hostname === 'docs.angularjs.org', headEl = document.getElementsByTagName('head')[0], sync = true;
 
@@ -40,6 +41,10 @@
 			 addTag('script', {src: angularPath + 'docs/js/versions-data.js' }, sync);
 			 addTag('script', {src: angularPath + 'docs/js/pages-data.js' }, sync);
 			 addTag('script', {src: angularPath + 'docs/js/docs.js' }, sync);
+
+
+			 addTag('link', {rel: 'stylesheet', href: angularGridPath + 'ng-grid.min.css', type: 'text/css'});
+			 addTag('script', {src: angularGridPath + 'ng-grid-2.0.9.debug.js' }, sync);
 
 			 function addTag(name, attributes, sync) {
 				 var el = document.createElement(name), attrName;
@@ -83,6 +88,9 @@ _gaq.push(['_setDomainName', '.angularjs.org']);
 
 </script>
 <style>
+.gridStyle{
+	height: '100%';
+}
 </style>
 				</head>
 				<body role="document">
@@ -196,16 +204,11 @@ _gaq.push(['_setDomainName', '.angularjs.org']);
 						<div class="main-grid main-body-grid" ng-controller="MainCtrl">
 							<div class="grid-left" ng-controller="LeftCtrl">
 								<div class="side-navigation" ng-show="toc==true">
-									<ul class="nav-list naked-list">
-										{{article}}
-										<!-- ngRepeat:
-										navGroup
-										in
-										currentArea.navGroups
-										track
-										by
-										navGroup.name
-										-->
+									<ul class="nav-list naked-list">	
+									<li ng-repeat="vote in votes">
+									<a href="{{vote.link}}"><span> {{vote.title}} </span></a>
+											<span> {{vote.count}} </span>
+									</li>
 									</ul>
 									<a href="" ng-click="toc=false" class="toc-close visible-xs">
 										<span class="glyphicon glyphicon-remove toc-close-icon"></span>
@@ -218,11 +221,19 @@ _gaq.push(['_setDomainName', '.angularjs.org']);
 							</div>
 							<div class="grid-right" ng-controller="RightCtrl">
 								<div id="loading" ng-show="loading">Loading...</div>
+								<!--<div class="gridStyle" style="height: 600px;" ng-grid="gridOptions"></div>-->
 								<ul>
 									<li ng-repeat="news in newses">
 									<a href="{{news.link}}"><span>
 									{{news.title}}
 							</span></a>
+							<span> | </span>
+							<small><a href="javascript:void(0);" ng-click="like($index)">
+										Like
+								</a></small> <span> | </span>
+							<small><a href="javascript:void(0);" ng-click="unlike($index)">
+										DisLike
+							</a></small>
 									</li>
 								</ul>
 							</div>
@@ -243,5 +254,7 @@ _gaq.push(['_setDomainName', '.angularjs.org']);
 				{% endverbatim %}
 				</body>
 				<script src="{% static "angular/app.js" %}" type="text/javascript"></script>
+				<script src="{% static "angular/service.js" %}" type="text/javascript"></script>
+				<script src="{% static "angular/controller.js" %}" type="text/javascript"></script>
 			</html>
 
