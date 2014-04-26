@@ -3,7 +3,7 @@
 
 import urllib2
 import urllib
-from lxml import etree as ET
+#from lxml import etree as ET
 import collections
 import re
 import logging
