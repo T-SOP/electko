@@ -22,7 +22,7 @@ def newsInfo():
 	cps = ["37736525","70640889,264","1119","120","78305928","1185","73","98","23","310","49","8"]
 	for cp in cps:
 		data = {}
-		data['q'] = '세월호'
+		data['q'] = '????호'
 		data['cp'] = cp
 		data = urllib.urlencode(data)
 		req = urllib2.Request(url,data)
