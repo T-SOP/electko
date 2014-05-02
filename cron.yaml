@@ -1,0 +1,4 @@
+cron:
+- description: daily 1 hours news update
+  url: /news/update
+  schedule: every 1 hours
