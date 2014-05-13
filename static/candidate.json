@@ -1,0 +1,79 @@
+{
+	"status" : "success",
+	"result" : [
+			{
+				"name" : "강성현",
+				"zcode" : "02",
+				"part" : "새누리당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100103375/gicho/100103375.jpg",
+				"job" : "정당인",
+				"sex" : "1",
+				"info" : ""
+			},					{
+				"name" : "이성복",
+				"zcode" : "02",
+				"part" : "새누리당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100103395/gicho/100103395.jpg",
+				"job" : "컴퓨터 프로그래머",
+				"sex" : "1",
+				"info" : ""
+			},		{
+				"name" : "이혜훈",
+				"zcode" : "02",
+				"part" : "새누리당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100104353/gicho/100104353.jpg",
+				"job" : "정당인",
+				"sex" : "2",
+				"info" : ""
+			},		{
+				"name" : "정미홍",
+				"zcode" : "02",
+				"part" : "새누리당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100106433/gicho/100106433.jpg",
+				"job" : "(주)더코칭그룹 대표이사",
+				"sex" : "2",
+				"info" : ""
+			},
+				{
+				"name" : "김황식",
+				"zcode" : "02",
+				"part" : "새누리당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100109645/gicho/100109645.jpg",
+				"job" : "정당인",
+				"sex" : "1",
+				"info" : ""
+			},		{
+				"name" : "정태홍",
+				"zcode" : "02",
+				"part" : "통합진보당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100109050/gicho/100109050.jpg",
+				"job" : "정당인",
+				"sex" : "1",
+				"info" : ""
+			},					{
+				"name" : "박호원",
+				"zcode" : "02",
+				"part" : "한나라당",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100104404/gicho/100104404.jpg",
+				"job" : "사업",
+				"sex" : "1",
+				"info" : ""
+			},	{
+				"name" : "홍정식",
+				"zcode" : "02",
+				"part" : "무소속",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100103318/gicho/100103318.jpg",
+				"job" : "정당인",
+				"sex" : "1",
+				"info" : ""
+			},	{
+				"name" : "한성렬",
+				"zcode" : "02",
+				"part" : "무소속",
+				"picture" : "http://info.nec.go.kr/photo_20140604/Sd1100/Sgg3110000/Hb100104923/gicho/100104923.jpg",
+				"job" : "작가",
+				"sex" : "1",
+				"info" : ""
+			}		
+		]
+}

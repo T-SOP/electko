@@ -9,7 +9,8 @@ import json
 
 def index(request):
 	context = {}
-	return render(request, 'index.html',context)
+	context['imageUrl'] = 'http://nec.go.kr';
+	return render(request, b'index.html',context)
 
 def info(request):
 	info = memcache.get('news')

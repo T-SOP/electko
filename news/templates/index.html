@@ -1,14 +1,253 @@
 {% load staticfiles %}
 <html>
 <head>
-<title>Map</title>
-<link href="{% static "lib/resources/css-debug/sencha-touch.css" %}" rel="stylesheet" type="text/css"></link>
-<link href="{% static "lib/resources/css-debug/apple.css" %}" rel="stylesheet" type="text/css"></link>
-<script src="{% static "lib/sencha-touch-all-debug.js" %}" type="text/javascript"></script>
-<!--<script src="{% static "app.js" %}" type="text/javascript"></script> -->
-<script src="{% static "app2.js" %}" type="text/javascript"></script>
+<title>중앙 선거 관리 위원회</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+*						{ padding:0; margin:0; font-size:12px; color:#767674; font-family:dotum, '돋움'; }
+img					{ border:0; }
+li						{ list-style-type:none; }
+
+body					{ background:url({{ imageUrl }}/images/lightWeightMain2/body_bg.gif) 0 0 repeat-x; }
+div#wrap			{ width:998px; margin:0 auto; position:relative; }
+div#header						{ width:998px; }
+div#header h1.logo			{ width:998px; padding:0 0 19px 0 }
+div.head							{ padding:0 0 0 42px; width:956px; height:92px; overflow:hidden; }
+div.head p.logo2				{ float:left; padding:0 81px 0 0; }
+div.head p.slogan			{ float:left; padding:11px 0 0 0; }
+
+div.d_day							{ width:144px; height:40px; float:right; margin:23px 0 0 0; background:url({{imageUrl}}/images/lightWeightMain2/bg_day.gif) no-repeat 0 0; padding:6px 0 0 28px; }
+div.d_day span.date		{ background:url({{imageUrl}}/images/lightWeightMain2/bg_date.gif) no-repeat 0 0; display:block; float:left; width:14px; height:18px; color:#fff; font-weight:bold; padding:3px 0 0 3px; }
+div.d_day span.month,
+div.d_day span.day			{ color:white; font-size:1.5em; font-weight:bold; margin-left:9px; text-align:center; margin:0px 0 0 8px; float:left; }
+div.d_day span.day			{ margin-left:24px; }
+.hidden								{ display:none; }
+
+p.quick						{ position:absolute; top:112px; right:-80px; width:75px; height:270px; text-align:right; }
+
+
+div#container					{ width:998px; display:inline-block; padding:0 0 26px 0; }
+
+div.boxArea						{ width:978px; height:150px; border:10px solid #afb7c3; }
+div.boxArea dl.box			{ float:left; height:150px; padding:0 1px 0 0; background:url({{imageUrl}}/images/lightWeightMain2/box_bg.gif) 100% 0 no-repeat; }
+div.boxArea dl.box1			{ width:157px; }
+div.boxArea dl.box2			{ width:165px; }
+div.boxArea dl.box3			{ width:160px; }
+div.boxArea dl.box4			{ width:162px; }
+div.boxArea dl.box5			{ width:161px; }
+div.boxArea dl.box6			{ width:166px; padding:0; background:none; }
+
+div.boxArea dl.box dd		{ padding:0 0 0 15px; color:#a0a0a0; font-weight:bold; line-height:145%; margin:-3px 0 0 0; }
+div.boxArea dl.box dd ul	{ margin:0 0 0 -3px; }
+div.boxArea dl.box dd ul li			{ padding:0 0 0 9px; background:url({{imageUrl}}/images/lightWeightMain2/box_bul.gif) 0 50% no-repeat; }
+div.boxArea dl.box dd ul li a			{ text-decoration:none; }
+div.boxArea dl.box dd ul li a:hover			{ text-decoration:underline; }
+
+ul.linkBt							{ width:998px; overflow:hidden; margin:3px 0 15px 0; }
+ul.linkBt li							{ float:left; height:54px; text-align:center; background:url({{imageUrl}}/images/lightWeightMain2/linkBt_bg.gif) 0 0 repeat-x; margin:0 2px 0 0; }
+ul.linkBt li a						{ font-size:14px; font-weight:bold; color:#fff; display:inline-block; width:100%; height:35px; padding:19px 0 0 0; text-decoration:none; }
+ul.linkBt li a:hover			{ text-decoration:underline; }
+ul.linkBt li a span.fs			{ font-size:12px; color:#e2e2e3; display:block; padding:0 0 2px 0; }
+ul.linkBt li a span.yel		{ font-size:14px; color:#fdd000; }
+ul.linkBt li.lb1					{ width:167px; }
+ul.linkBt li.lb2					{ width:188px; }
+ul.linkBt li.lb2 a					{ height:41px; padding:13px 0 0 0; }
+ul.linkBt li.lb3					{ width:127px; }
+ul.linkBt li.lb4					{ width:147px; }
+ul.linkBt li.lb5					{ width:200px; }
+ul.linkBt li.lb5 a					{ height:42px; padding:12px 0 0 0; }
+ul.linkBt li.lb6					{ margin:0; background:none; }
+ul.linkBt li.lb6 a					{ height:54px; padding:0; }
+
+div.linkArea						{ width:994px; padding:0 0 0 4px; display:inline-block; }
+div.linkArea div.la1			{ width:197px; float:left; position:relative; }
+div.linkArea div.la1 p.tit	{ padding:0 0 6px 0; }
+div.linkArea div.la1 p.img	{ padding:0 0 0 1px; }
+div.linkArea div.la1 p.img a			{ position:static; padding:0; top:0; left:0; }
+div.linkArea div.la1 a		{ position:absolute; right:34px; top:5px; display:inline-block; padding:3px; }
+
+div.linkArea div.la2			{ width:188px; margin:38px 0 0 0; float:left; background:url({{imageUrl}}/images/lightWeightMain2/la2_bg.gif) 119px 0 no-repeat; }
+div.linkArea div.la2 ul		{ padding:16px 0 0 7px; }
+div.linkArea div.la2 ul li		{ padding:0 0 10px 0; }
+
+div.linkArea div.la3			{ width:182px; height:132px; float:left; padding:40px 0 0 26px; background:url({{imageUrl}}/images/lightWeightMain2/laBar.gif) 0 43px no-repeat; }
+div.linkArea div.la3 dl.la3_1				{ padding:2px 0 21px 0; background:url({{imageUrl}}/images/lightWeightMain2/la3_bg1.gif) 128px 0 no-repeat; }
+div.linkArea div.la3 dl.la3_2				{ padding:6px 0 0 0; background:url({{imageUrl}}/images/lightWeightMain2/la3_bg2.gif) 136px 0 no-repeat; }
+div.linkArea div.la3 dl dd	{ padding:10px 0 0 3px; }
+
+div.linkArea div.la4			{ width:182px; height:131px; float:left; padding:41px 0 0 30px; background:url({{imageUrl}}/images/lightWeightMain2/laBar.gif) 0 43px no-repeat; }
+div.linkArea div.la4_2		{ padding:3px 0 0 52px; background:url({{imageUrl}}/images/lightWeightMain2/la4_bg.gif) 0 0 no-repeat; }
+div.linkArea div.la4_2 ul	{ padding:15px 0 0 5px; }
+div.linkArea div.la4_2 ul li					{ padding:0 0 10px 0; }
+
+div.linkArea div.la5			{ width:167px; height:136px; float:right; padding:36px 0 0 18px; background:url({{imageUrl}}/images/lightWeightMain2/laBar.gif) 0 43px no-repeat; }
+div.linkArea div.la5 p		{ padding:0 0 2px 0; }
+div.linkArea div.la5 p a.la5Bt			{ padding:13px 13px 13px 59px; display:inline-block; }
+
+div.linkArea2					{ width:100%; margin:15px 0 0 0; }
+div.linkArea2 ul					{ display:inline-block; padding:0 0 0 4px; }
+div.linkArea2 ul li				{ float:left; padding:0 10px 0 0; }
+div.linkArea2 ul li.last		{ padding:0; }
+
+
+
+div.footer							{ height:64px; border-top:1px solid #d8dbe5; padding:16px 0 0 0; }
+div.footer p.footLogo		{ float:left; padding:0 20px 0 0; }
+div.footer p.add				{ float:left; color:#666; line-height:180%; margin:-4px 0 0 0; }
+div.footer p.num				{ width:222px; float:right; padding:0 4px 0 0; }
+div.footer p.num span		{ float:left; width:131px; color:#666; }
+div.footer p.num span strong			{ display:inline-block; padding:4px 0 0 60px; color:#666; }
+div.footer p.num img		{ float:right; width:91px; }
+
+//-->
+</style>
+
 </head>
 <body>
+<div id="wrap">
+
+	<div id="header">
+		<h1 class="logo"><a href="http://www.nec.go.kr/portal/main.do" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/logo.gif" alt="중앙선거관리위원회 대표홈페이지 바로가기"></a></h1>
+		<div class="head">
+			<p class="logo2"><img src="{{imageUrl}}/images/lightWeightMain2/logo2.gif" alt="제6회 전국동시지방 선거"></p>
+			<p class="slogan"><img src="{{imageUrl}}/images/lightWeightMain2/slogan.gif" alt="나와 가족을 위해 투표로 응원하세요!"></p>
+					<div class="d_day"> <span class="hidden">d-day</span><span class="date">0</span><span class="date">2</span><span class="date">2</span> <span class="month">06</span><span class="hidden">월</span> <span class="day">04</span><span class="hidden">일</span>
+						<!-- <p class="txt">제6회 전국동시지방선거</p>  -->
+					</div>
+		</div>
+	</div>
+
+	<p class="quick">
+		<a href="http://www.nec.go.kr/portal/main.do" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/quick.gif" alt="대표홈페이지 바로가기"></a>
+	</p>
+
+	<div id="container">
+		<div class="boxArea">
+			<dl class="box box1">
+				<dt><a href="http://info.nec.go.kr/main/showDocument.xhtml?topMenuId=BI&amp;electionId=0020140604" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/boxTit1.gif" alt="기본현황"></a></dt>
+				<dd>
+					<ul class="">
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=BI&amp;secondMenuId=BIES01" target="_blank" title="새창으로 열기">선거일정</a></li>
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=BI&amp;secondMenuId=BIGI" target="_blank" title="새창으로 열기">일반현황</a></li>
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=BI&amp;secondMenuId=BIAP" target="_blank" title="새창으로 열기">사전투표소현황</a></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="box box2">
+				<dt><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=PC" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/boxTit2.gif" alt="예비후보자"></a></dt>
+				<dd>
+					<ul class="">
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=PC&amp;secondMenuId=PCRI03" target="_blank" title="새창으로 열기">예비후보자 명부</a></li>
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=PC&amp;secondMenuId=PCRI01" target="_blank" title="새창으로 열기">예비후보자 등록수</a></li>
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=PC&amp;secondMenuId=PCRI04" target="_blank" title="새창으로 열기">사퇴/사망/등록무효</a></li>
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=PC&amp;secondMenuId=PCRI05" target="_blank" title="새창으로 열기">예비후보자 각종통계</a></li>
+						<li><a href="http://info.nec.go.kr/bizcommon/popup/popupsearch_searchPopupPre.xhtml" target="_blank" title="새창으로 열기">예비후보자 찾기</a></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="box box3">
+				<dt><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=CP" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/boxTit3.gif" alt="후보자"></a></dt>
+				<dd>
+					후보자 등록일<br>(2014. 5. 15.)부터<br>조회 가능합니다.
+				</dd>
+			</dl>
+			<dl class="box box4">
+				<dt><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=EC" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/boxTit4.gif" alt="선거운동"></a></dt>
+				<dd>
+					<ul class="">
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=EC&amp;secondMenuId=ECEO" target="_blank" title="새창으로 열기">정당선거사무소</a></li>
+						<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=EC&amp;secondMenuId=ECPC" target="_blank" title="새창으로 열기">예비후보자 운동기구</a></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="box box5">
+				<dt><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=VC" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/boxTit5.gif" alt="투ㆍ개표"></a></dt>
+				<dd>
+					투ㆍ개표일<br>(2014. 6. 4.)부터<br>조회 가능합니다.
+				</dd>
+			</dl>
+			<dl class="box box6">
+				<dt><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0020140604&amp;topMenuId=EP" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/boxTit6.gif" alt="당선인"></a></dt>
+				<dd>
+					당선인결정 후<br>조회 가능합니다.
+				</dd>
+			</dl>
+		</div>
+
+		<ul class="linkBt">
+			<!-- <li class="lb1"><a href="#pop1" onclick="window.open('http://nec.go.kr/portal/bbs/listPop/B0000379.do', 'popup', 'width=740, height=800, scrollbars=yes, toolbal=no, location=no, status=no, menubar=no, resizable=no'); return false;">선거 각종자료</a></li> -->
+			<li class="lb1"><a href="http://www.nec.go.kr/portal/bbs/list/B0000338.do?menuNo=200185" target="_blank" title="새창으로 열기">선거 각종자료</a></li>
+			<li class="lb2"><a href="#pop2" onclick="window.open('http://nec.go.kr/portal/bbs/listPop/B0000381.do', 'popup', 'width=740, height=800, scrollbars=yes, toolbal=no, location=no, status=no, menubar=no, resizable=no'); return false;">공지ㆍ보도<br>그건 이렇습니다</a></li>
+			<li class="lb3"><a href="#pop3" onclick="window.open('http://nec.go.kr/portal/bbs/listPop/B0000383.do', 'popup', 'width=740, height=800, scrollbars=yes, toolbal=no, location=no, status=no, menubar=no, resizable=no'); return false;">홍보자료</a></li>
+			<li class="lb4"><a href="http://blog.nec.go.kr/130187424903" target="_blank" title="새창으로 열기">사전투표안내</a></li>
+			<!--
+			<li class="lb4"><a href="#pop4" onclick="window.open('/portal/lwMain/necpop', 'popup', 'width=740, height=800, scrollbars=yes, toolbal=no, location=no, status=no, menubar=no, resizable=no'); return false;">사전투표안내</a></li>
+			-->
+			<li class="lb5"><a href="https://apply.nec.go.kr" target="_blank" title="새창으로 열기"><!--<a href="#alert" onclick="alert('5월 13일부터 신청 가능합니다.')">--><span class="fs">군인ㆍ경찰공무원</span><span class="yel">선거공보발송신청</span></a></li>
+			<li class="lb6"><a href="/portal/subMain.do?menuNo=200041" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/nectv.gif" alt="NEC TV 인터넷방송"></a></li>
+		</ul>
+
+		<div class="linkArea">
+			<div class="la1">
+				<p class="tit"><img src="{{imageUrl}}/images/lightWeightMain2/la1Tit.gif" alt="역대선거투표율"></p>
+				<p class="img"><a href="http://nec2014.maru.net/vote/vote_05.html" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la1Img.gif" alt="전국동시지방선거 - 제1회 68.4% - 제2회 52.7% - 제3회 48.8% - 제4회 51.6% - 제5회 54.5%"></a></p>
+				<a href="http://nec2014.maru.net/vote/vote_05.html" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/more.gif" alt="역대선거투표율 더보기"></a>
+			</div>
+			<div class="la2">
+				<p class="tit"><img src="{{imageUrl}}/images/lightWeightMain2/la2Tit.gif" alt="선거에 관한 모든 통계자료"></p>
+				<ul class="">
+					<li><a href="http://info.nec.go.kr/main/showDocument.xhtml?electionId=0000000000&amp;topMenuId=BI" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la2_bt1.gif" alt="역대선거정보"></a></li>
+					<li><a href="http://info.nec.go.kr/" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la2_bt2.gif" alt="현재선거정보"></a></li>
+				</ul>
+			</div>
+			<div class="la3">
+				<dl class="la3_1">
+					<dt><img src="{{imageUrl}}/images/lightWeightMain2/la3Tit1.gif" alt="선거법령정보"></dt>
+					<dd><a href="/portal/contents.do?menuNo=200012" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la3_bt1.gif" alt="정치관계법질의"></a></dd>
+				</dl>
+				<dl class="la3_2">
+					<dt><img src="{{imageUrl}}/images/lightWeightMain2/la3Tit2.gif" alt="정책공약알리미"></dt>
+					<dd><a href="http://party.nec.go.kr/" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la3_bt2.gif" alt="정책공약 확인하기"></a></dd>
+				</dl>
+			</div>
+			<div class="la4">
+				<div class="la4_2">
+					<p class="tit"><img src="{{imageUrl}}/images/lightWeightMain2/la4Tit.gif" alt="투표소 찾기"></p>
+					<ul class="">
+						<li><a href="http://info.nec.go.kr/bizcommon/popup/popupsearch_searchPopupBiai.xhtml" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la4_bt1.gif" alt="사전투표소찾기"></a></li>
+						<li><a href="#alert2" onclick="alert('일반투표소 찾기는 5월15일 오픈합니다.')"><img src="{{imageUrl}}/images/lightWeightMain2/la4_bt2.gif" alt="일반투표소찾기"></a></li>
+						<li><a href="#alert3" onclick="alert('내 투표소 찾기는 5월 26일 오픈합니다.')"><img src="{{imageUrl}}/images/lightWeightMain2/la4_bt3.gif" alt="내투표소찾기"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="la5">
+				<p><a href="http://blog.naver.com/nec1963.do" target="_blank" title="새창으로 열기"><img src="{{imageUrl}}/images/lightWeightMain2/la5_bt1.gif" alt="중앙선거관리위원회 공식블로그 정정당당스토리 바로가기"></a></p>
+				<p><a href="http://priceinfo.nec.go.kr/price/nec_price/index.jsp" target="_blank" title="새창으로 열기" class="la5Bt"><img src="{{imageUrl}}/images/lightWeightMain2/la5_bt2.gif" alt="후보자를 위한 선거운동물품가격정보"></a></p>
+			</div>
+		</div>
+
+		<div class="linkArea2">
+			<ul>
+				<li><a href="/portal/bbs/view/B0000338/10388.do?menuNo=200061&amp;searchYear=&amp;searchMonth=&amp;searchWrd=&amp;searchCnd=&amp;viewType=&amp;pageIndex=1"><img src="{{imageUrl}}/images/lightWeightMain2/link1.gif" alt="선거공보발송신청안내"></a></li>
+				<li><a href="https://apply.nec.go.kr/" target="_blank" title="새창열림"><img src="{{imageUrl}}/images/lightWeightMain2/link4.gif" alt="선거공보발송신청 바로가기"></a></li>
+				<li><a href="/portal/bbs/view/B0000338/10308.do?menuNo=200061&amp;searchYear=&amp;searchMonth=&amp;searchWrd=&amp;searchCnd=&amp;viewType=&amp;pageIndex=1"><img src="{{imageUrl}}/images/lightWeightMain2/link2.gif" alt="거소투표신고 안내문 및 거소투표신고서식"></a></li>
+				<li class="last"><a href="http://su.nec.go.kr/su/sub3.jsp?thisPage=1&amp;brdType=R&amp;bbIdx=5989&amp;searchField=title&amp;searchText=" target="_blank" title="새창열림"><img src="{{imageUrl}}/images/lightWeightMain2/link3.gif" alt="시각장애인을 위한 음성투표안내문"></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer">
+		<p class="footLogo"><img src="{{imageUrl}}/images/lightWeightMain2/footLogo.gif" alt="중앙선거관리위원회"></p>
+		<p class="add">[427-727] 경기도 과천시 홍촌말로 44(중앙동 2-3)<br>대표전화 : 02-503-1114</p>
+		<p class="num">
+			<span>선거법질의·신고제보 : <br> <strong>국번없이</strong></span>
+			<img src="{{imageUrl}}/images/lightWeightMain2/num.gif" alt="1390">
+		</p>
+	</div>
+</div>
+
 </body>
 </html>
 
