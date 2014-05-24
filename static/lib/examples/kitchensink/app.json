@@ -1,123 +1,162 @@
 {
     /**
-     * The application's namespace, used by Sencha Command to generate classes
+     * The application's namespace.
      */
     "name": "KitchenSink",
 
     /**
-     * The file path to this application's front HTML document, relative to this app.json file
+     * Comma-separated string with the paths of directories or files to search. Any classes
+     * declared in these locations will be available in your class "requires" or in calls
+     * to "Ext.require". The "app.dir" variable below is expanded to the path where the
+     * application resides (the same folder in which this file is located).
+     */
+    "classpath": "${app.dir}/app,${app.dir}/../ux",
+
+    /**
+     * The Sencha Framework for this application: "ext" or "touch".
+     */
+    "framework": "ext",
+
+    /**
+     * The name of the theme for this application.
+     */
+    "theme": "ext-theme-neptune",
+
+    /**
+     * The list of required packages (with optional versions; default is "latest").
+     *
+     * For example,
+     *
+     *      "requires": [
+     *          "sencha-charts"
+     *      ]
+     */
+    "requires": [
+        "ext-locale",
+        "sencha-amf",
+        "sencha-soap",
+        "sencha-charts"
+    ],
+
+    /**
+     * Sass configuration properties.
+     */
+    "sass": {
+        /**
+         * The root namespace to use when mapping *.scss files to classes in the
+         * sass/src and sass/var directories. For example, "KitchenSink.view.Foo" would
+         * map to "sass/src/view/Foo.scss". If we changed this to "KitchenSink.view" then
+         * it would map to "sass/src/Foo.scss". To style classes outside the app's
+         * root namespace, change this to "". Doing so would change the mapping of
+         * "KitchenSink.view.Foo" to "sass/src/KitchenSink/view/Foo.scss".
+         */
+        "namespace": "KitchenSink"
+    },
+
+    /**
+     * The file path to this application's front HTML document. This is relative
+     * to this app.json file.
      */
     "indexHtmlPath": "index.html",
 
     /**
-     * The absolute URL to this application in development environment, i.e: the URL to run this application
-     * on your web browser during development, e.g: "http://localhost/myapp/index.html".
+     * The absolute URL to this application in development environment, i.e: the URL to run
+     * this application on your web browser, e.g: "http://localhost/KitchenSink/index.html".
      *
-     * This value is needed when build to resolve your application's dependencies if it requires server-side resources
-     * that are not accessible via file system protocol.
+     * This value is needed when build to resolve your application's dependencies if it
+     * requires server-side resources. This setting is only used if you enable dynamic
+     * resolution by setting "skip.resolve=0" (in .sencha/app/sencha.cfg) or if you
+     * invoke "sencha app resolve".
      */
     "url": null,
 
     /**
      * List of all JavaScript assets in the right execution order.
-     * Each item is an object with the following format:
-     *      {
-     *          "path": "path/to/script.js" // Path to file, if local file it must be relative to this app.json file
-     *          "remote": true              // (Optional)
-     *                                      // - Defaults to undefined (falsey) to signal a local file which will be copied
-     *                                      // - Specify true if this file is a remote file which will not to be copied
-     *          "update": "delta"           // (Optional)
-     *                                      //  - If not specified, this file will only be loaded once, and
-     *                                      //    cached inside localStorage until this value is changed.
-     *                                      //  - "delta" to enable over-the-air delta update for this file
-     *                                      //  - "full" means full update will be made when this file changes
-     *          "x-bootstrap": true         // (Optional)
-     *                                      // Indicates a development mode only dependency.
-     *                                      // These files will not be copied into the build directory or referenced
-     *                                      // in the generate app.json manifest for the micro loader.
      *
+     * Each item is an object with the following format:
+     *
+     *      {
+     *          // Path to file. If the file is local this must be a relative path from
+     *          // this app.json file.
+     *          //
+     *          "path": "path/to/script.js",   // REQUIRED
+     *
+     *          // Set to true on one file to indicate that it should become the container
+     *          // for the concatenated classes.
+     *          //
+     *          "bundle": false,    // OPTIONAL
+     *
+     *          // Set to true to include this file in the concatenated classes.
+     *          //
+     *          "includeInBundle": false,  // OPTIONAL
+     *
+     *          // Specify as true if this file is remote and should not be copied into the
+     *          // build folder. Defaults to false for a local file which will be copied.
+     *          //
+     *          "remote": false,    // OPTIONAL
+     *
+     *          // If not specified, this file will only be loaded once, and cached inside
+     *          // localStorage until this value is changed. You can specify:
+     *          //
+     *          //   - "delta" to enable over-the-air delta update for this file
+     *          //   - "full" means full update will be made when this file changes
+     *          //
+     *          "update": "",        // OPTIONAL
+     *
+     *          // A value of true indicates that is a development mode only dependency.
+     *          // These files will not be copied into the build directory or referenced
+     *          // in the generate app.json manifest for the micro loader.
+     *          //
+     *          "bootstrap": false   // OPTIONAL
      *      }
      */
     "js": [
         {
-            "path": "../../sencha-touch-all-debug.js",
-            "x-bootstrap": true
-        },
-        {
-            "path": "bootstrap.js",
-            "x-bootstrap": true
-        },
-        {
             "path": "app.js",
-            "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
-            "update": "delta"
-        }
+            "bundle": true
+        },
+    	{
+            "path": "lib/prettify/prettify.js",
+            "includeInBundle": true
+    	},
+    	{
+            "path": "../shared/examples.js",
+            "includeInBundle": true
+    	}
     ],
 
     /**
      * List of all CSS assets in the right inclusion order.
-     * Each item is an object with the following format:
-     *      {
-     *          "path": "path/to/item.css" // Path to file, if local file it must be relative to this app.json file
-     *          "remote": true             // (Optional)
-     *                                     // - Defaults to undefined (falsey) to signal a local file which will be copied
-     *                                     // - Specify true if this file is a remote file which will not to be copied
-     *          "update": "delta"          // (Optional)
-     *                                     //  - If not specified, this file will only be loaded once, and
-     *                                     //    cached inside localStorage until this value is changed to either one below
-     *                                     //  - "delta" to enable over-the-air delta update for this file
-     *                                     //  - "full" means full update will be made when this file changes
      *
+     * Each item is an object with the following format:
+     *
+     *      {
+     *          // Path to file. If the file is local this must be a relative path from
+     *          // this app.json file.
+     *          //
+     *          "path": "path/to/stylesheet.css",   // REQUIRED
+     *
+     *          // Specify as true if this file is remote and should not be copied into the
+     *          // build folder. Defaults to false for a local file which will be copied.
+     *          //
+     *          "remote": false,    // OPTIONAL
+     *
+     *          // If not specified, this file will only be loaded once, and cached inside
+     *          // localStorage until this value is changed. You can specify:
+     *          //
+     *          //   - "delta" to enable over-the-air delta update for this file
+     *          //   - "full" means full update will be made when this file changes
+     *          //
+     *          "update": ""      // OPTIONAL
      *      }
      */
     "css": [
         {
-            "path": "../../resources/css/base.css",
-            "platform": ["base"],
-            "update": "delta"
+            "path": "lib/prettify/prettify.css"
         },
         {
-            "path": "resources/css/sencha-touch.css",
-            "platform": ["desktop", "firefox"],
-            "exclude": ["ie10", "windows", "tizen"],
-            "theme": "Default",
-            "update": "delta"
-        },
-        {
-            "path": "resources/css/wp.css",
-            "platform": ["ie10", "windows"],
-            "theme": "Windows",
-            "update": "delta"
-        },
-        {
-            "path": "resources/css/bb10.css",
-            "platform": ["blackberry"],
-            "theme": "Blackberry",
-            "update": "delta"
-        },
-        {
-            "path": "resources/css/cupertino.css",
-            "platform": ["ios"],
-            "theme": "Cupertino",
-            "update": "delta"
-        },
-        {
-            "path": "resources/css/cupertino-classic.css",
-            "platform": ["ios-classic"],
-            "theme": "CupertinoClassic",
-            "update": "delta"
-        },
-        {
-            "path": "resources/css/mountainview.css",
-            "platform": ["android"],
-            "theme": "MountainView",
-            "update": "delta"
-        },
-        {
-            "path": "resources/css/tizen.css",
-            "platform": ["tizen"],
-            "theme": "Tizen",
-            "update": "delta"
+            "path": "${build.dir.relative}/resources/KitchenSink-all.css",
+            "bootstrap": true
         }
     ],
 
@@ -129,19 +168,7 @@
          * List of items in the CACHE MANIFEST section
          */
         "cache": [
-            "index.html",
-            "carregions.json",
-            "test.json",
-            "userData.json",
-            "feed.js",
-            "resources/images/circle-touch.png",
-            "resources/images/circle-performance.png",
-            "resources/images/circle-architecture.png",
-            "resources/images/circle-native.png",
-            "resources/images/circle-learn.png",
-            "resources/images/circle-touch.png",
-            "resources/images/noise.gif",
-            "resources/images/sencha_small.png"
+            "index.html"
         ],
         /**
          * List of items in the NETWORK section
@@ -158,21 +185,15 @@
     /**
      * Extra resources to be copied along when build
      */
-    "extras": [
-        "carregions.json",
-        "test.json",
-        "userData.json",
-        "feed.js",
-        "resources/images",
-        "resources/icons",
-        "resources/loading"
+    "resources": [
     ],
 
     /**
      * File / directory name matchers to ignore when copying to the builds, must be valid regular expressions
      */
     "ignore": [
-        "\.svn$"
+        "^\\.svn$",
+        "^\\.git$"
     ],
 
     /**
@@ -181,22 +202,35 @@
      */
     "archivePath": "archive",
 
-    "buildOptions": {
-        "product": "touch",
-        "minVersion": 3,
-        "debug": false,
-        "logger": "no"
-    },
-
-    /**
-     * List of package names to require for the cmd build process
-     */
-    "requires": [
-    ],
-
     /**
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "3a867610-670a-11e1-a90e-4318029d18bb"
+    "id": "7f0d3b50-5cb1-47e0-97b7-ffe69d12d49e",
+
+    "locales": [
+        "en",
+        "he"
+    ],
+
+    "builds": {
+        "classic": {
+            "theme": "ext-theme-classic"
+        },
+        "gray": {
+            "theme": "ext-theme-gray"
+        },
+        "access": {
+            "theme": "ext-theme-access"
+        },
+        "crisp": {
+            "theme": "ext-theme-crisp"
+        },
+        "neptune": {
+            "theme": "ext-theme-neptune"
+        },
+        "neptune-touch": {
+            "theme": "ext-theme-neptune-touch"
+        }
+    }
 }
