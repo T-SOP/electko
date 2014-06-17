@@ -17,20 +17,20 @@ class Rss:
 
 def newsInfo():
 	infos = []
-#	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&q=%BC%BC%BF%F9%C8%A3&'
+#	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&q=%EC%84%B8%EC%9B%94%ED%98%B8&'
 	url = 'http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&'
 	cps = ["37736525","70640889,264","1119","120","78305928","1185","73","98","23","310","49","8"]
 	for cp in cps:
 		data = {}
-		data['q'] = '????ȣ'
-		data['cp'] = cp
+		data['q'] = '세월호'
+#		data['cp'] = cp
 		data = urllib.urlencode(data)
 		req = urllib2.Request(url,data)
 		response = urllib2.urlopen(req)
 		xml =  response.read().decode('cp949', 'ignore').encode('utf-8')
 		parser = ET.XMLParser(encoding="utf-8")
 		rss =  ET.fromstring(xml,parser = parser)
-	
+		print xml
 		items = rss.findall('.//channel/item')
 		for item in items:
 			info = {};
@@ -40,7 +40,7 @@ def newsInfo():
 	#		info['description'] = item.find('description').text
 	#		info['content'] = child(item.find('link').text)
 			infos.append(info)
-
+	print infos
 	return infos
 
 def child(url):
@@ -58,3 +58,6 @@ def child(url):
 
 def wordCount(words,splitword = ' '):
 	return collections.Counter(words.split(splitword))
+
+if __name__ == "__main__":
+	print newsInfo()
